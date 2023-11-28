@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Localização Waze</title>
+    <style>
+        #wazeMap {
+            width: 1000px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <iframe id="wazeMap" src=""></iframe>
+    <a id="wazeRota" href="">Link Rota</a>
+    <script>
+        navigator.geolocation.getCurrentPosition(funciona, erro);
+
+        function funciona(pos) {
+            var la = pos.coords.latitude;
+            var lo = pos.coords.longitude;
+
+            var laR= -23.552631087603526;
+            var loR= -46.38674193632552;
+            urLink = `https://embed.waze.com/iframe?zoom=12&lat=${la}&lon=${lo}`
+            urlRota= `https://www.waze.com/pt-PT/live-map/directions?to=${la}%2C${lo}&from=${laR}%2C${loR}`
+            document.getElementById('wazeMap').src = urLink;
+            document.getElementById('wazeRota').href = urlRota
+        }
+
+        function erro() {
+            console.log('Não foi possível localizar');
+        }
+
+
+    </script>
+</body>
+</html>
